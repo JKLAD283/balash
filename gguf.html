@@ -1,9 +1,38 @@
 <!DOCTYPE html>
+<html>
 <head>
   <title>balash.com | .gguf models</title>
 </head>
 <body>
   <h1>.gguf models</h1>
-  <p>.gguf models not found. 😢</p>
+  
+  <button id="indirBtn">SmolVLM.gguf</button>
+
+  <script>
+    // ID'nin HTML'deki ile birebir aynı olması gerekir
+    const buton = document.getElementById('indirBtn');
+
+    buton.addEventListener('click', () => {
+      // 1. Butonun üzerindeki metni al ("SmolVLM.gguf")
+      const dosyaAdi = buton.innerText;
+      
+      // 2. İndirilecek dosyanın gerçek yolu
+      const dosyaYolu = "/ornek-dosya.gguf"; 
+
+      // 3. İndirme işlemi için sanal link oluşturma
+      const link = document.createElement('a');
+      link.href = dosyaYolu;
+      
+      // 4. Dosya adını butondaki isimle ayarla
+      link.download = dosyaAdi;
+      
+      // 5. İşlemi tetikle
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+      
+      console.log(dosyaAdi + " indirmesi başlatıldı.");
+    });
+  </script>
 </body>
 </html>
