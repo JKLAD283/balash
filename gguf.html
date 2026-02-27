@@ -11,33 +11,41 @@
   <button id="llamaBtn">Llama-3.2-3B-Instruct-Q4_K_M.gguf</button>
 
 <script>
-  // Ortak indirme fonksiyonu
   function indir(dosyaAdi) {
-    // Dosyaların bulunduğu yerel sunucu adresi
-    const sunucuAdresi = "http://192.168.1.40:8080/"; 
-    
-    const link = document.createElement('a');
-    // Örn: http://192.168.1.40/modeller/qwen.gguf
-    link.href = sunucuAdresi + dosyaAdi; 
-    link.download = dosyaAdi;
-    
-    document.body.appendChild(link);
-    link.click();
-    document.body.removeChild(link);
-  }
+  // Python http.server adresin
+  const sunucuAdresi = "http://192.168.1.40:8080/"; 
+  const link = document.createElement('a');
+  
+  link.href = sunucuAdresi + dosyaAdi; 
+  link.download = dosyaAdi;
+  
+  // Bazı tarayıcıların bağlantıyı kesmesini önlemek için yeni sekme tetikleyicisi
+  link.target = "_blank"; 
 
-  // Buton Tıklamaları
-  document.getElementById('smolBtn').addEventListener('click', function() {
-    indir(this.innerText);
-  });
+  document.body.appendChild(link);
+  link.click();
 
-  document.getElementById('qwenBtn').addEventListener('click', function() {
-    indir(this.innerText);
-  });
+  // 1 dakika (60.000 ms) bekleyip sonra linki kaldırır
+  setTimeout(() => {
+    if (document.body.contains(link)) {
+      document.body.removeChild(link);
+    }
+  }, 60000);
+}
 
-  document.getElementById('llamaBtn').addEventListener('click', function() {
-    indir(this.innerText);
-  });
+// Buton Dinleyicileri
+document.getElementById('smolBtn').addEventListener('click', function() {
+  indir(this.innerText);
+});
+
+document.getElementById('qwenBtn').addEventListener('click', function() {
+  indir(this.innerText);
+});
+
+document.getElementById('llamaBtn').addEventListener('click', function() {
+  indir(this.innerText);
+});
+
 </script>
 
 </body>
