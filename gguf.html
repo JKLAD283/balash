@@ -12,28 +12,15 @@
 
 <script>
   function indir(dosyaAdi) {
-  // Python http.server adresin
-  const sunucuAdresi = "http://192.168.1.40:8080/"; 
-  const link = document.createElement('a');
+  // Python sunucundaki dosyanın tam adresi
+  const dosyaUrl = "http://192.168.1.40:8080/" + dosyaAdi;
   
-  link.href = sunucuAdresi + dosyaAdi; 
-  link.download = dosyaAdi;
-  
-  // Bazı tarayıcıların bağlantıyı kesmesini önlemek için yeni sekme tetikleyicisi
-  link.target = "_blank"; 
-
-  document.body.appendChild(link);
-  link.click();
-
-  // 1 dakika (60.000 ms) bekleyip sonra linki kaldırır
-  setTimeout(() => {
-    if (document.body.contains(link)) {
-      document.body.removeChild(link);
-    }
-  }, 60000);
+  // Tarayıcıyı doğrudan dosya linkine yönlendirir.
+  // .gguf dosyası tarayıcıda önizlenemediği için otomatik indirme başlar.
+  window.location.href = dosyaUrl;
 }
 
-// Buton Dinleyicileri
+// Butonlara tıklandığında işlemi başlatır
 document.getElementById('smolBtn').addEventListener('click', function() {
   indir(this.innerText);
 });
