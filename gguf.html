@@ -11,32 +11,32 @@
   <button id="llamaBtn">Llama-3.2-3B-Instruct-Q4_K_M.gguf</button>
 
 <script>
-  // Fonksiyon: Buton metnini alır ve aynı isimle indirmeyi başlatır
-  function indir(dosyaAdi, dosyaYolu) {
+  // Ortak indirme fonksiyonu
+  function indir(dosyaAdi) {
+    // Dosyaların bulunduğu yerel sunucu adresi
+    const sunucuAdresi = "http://192.168.1.40/"; 
+    
     const link = document.createElement('a');
-    link.href = dosyaYolu;
-    link.download = dosyaAdi; // Buton ismi neyse dosya o isimle iner
+    // Örn: http://192.168.1.40/modeller/qwen.gguf
+    link.href = sunucuAdresi + dosyaAdi; 
+    link.download = dosyaAdi;
+    
     document.body.appendChild(link);
     link.click();
     document.body.removeChild(link);
   }
 
-  // SmolLM2 Butonu
-  const smolBtn = document.getElementById('smolBtn');
-  smolBtn.addEventListener('click', () => {
-    indir(smolBtn.innerText, "./smollm2-135m.gguf");
+  // Buton Tıklamaları
+  document.getElementById('smolBtn').addEventListener('click', function() {
+    indir(this.innerText);
   });
 
-  // Qwen Butonu
-  const qwenBtn = document.getElementById('qwenBtn');
-  qwenBtn.addEventListener('click', () => {
-    indir(qwenBtn.innerText, "./qwen.gguf");
+  document.getElementById('qwenBtn').addEventListener('click', function() {
+    indir(this.innerText);
   });
 
-  // Llama-3.2 Butonu
-  const llamaBtn = document.getElementById('llamaBtn');
-  llamaBtn.addEventListener('click', () => {
-    indir(llamaBtn.innerText, "./Llama-3.2-3B-Instruct-Q4_K_M.gguf");
+  document.getElementById('llamaBtn').addEventListener('click', function() {
+    indir(this.innerText);
   });
 </script>
 
