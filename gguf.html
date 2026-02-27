@@ -6,33 +6,39 @@
 <body>
   <h1>.gguf models</h1>
   
-  <button id="indirBtn">SmolVLM.gguf</button>
+  <button id="smolBtn">smollm2-135m.gguf</button>
+  <button id="qwenBtn">qwen.gguf</button>
+  <button id="llamaBtn">Llama-3.2-3B-Instruct-Q4_K_M.gguf</button>
 
-  <script>
-    // ID'nin HTML'deki ile birebir aynı olması gerekir
-    const buton = document.getElementById('indirBtn');
+<script>
+  // Fonksiyon: Buton metnini alır ve aynı isimle indirmeyi başlatır
+  function indir(dosyaAdi, dosyaYolu) {
+    const link = document.createElement('a');
+    link.href = dosyaYolu;
+    link.download = dosyaAdi; // Buton ismi neyse dosya o isimle iner
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+  }
 
-    buton.addEventListener('click', () => {
-      // 1. Butonun üzerindeki metni al ("SmolVLM.gguf")
-      const dosyaAdi = buton.innerText;
-      
-      // 2. İndirilecek dosyanın gerçek yolu
-      const dosyaYolu = "/ornek-dosya.gguf"; 
+  // SmolLM2 Butonu
+  const smolBtn = document.getElementById('smolBtn');
+  smolBtn.addEventListener('click', () => {
+    indir(smolBtn.innerText, "./smollm2-135m.gguf");
+  });
 
-      // 3. İndirme işlemi için sanal link oluşturma
-      const link = document.createElement('a');
-      link.href = dosyaYolu;
-      
-      // 4. Dosya adını butondaki isimle ayarla
-      link.download = dosyaAdi;
-      
-      // 5. İşlemi tetikle
-      document.body.appendChild(link);
-      link.click();
-      document.body.removeChild(link);
-      
-      console.log(dosyaAdi + " indirmesi başlatıldı.");
-    });
-  </script>
+  // Qwen Butonu
+  const qwenBtn = document.getElementById('qwenBtn');
+  qwenBtn.addEventListener('click', () => {
+    indir(qwenBtn.innerText, "./qwen.gguf");
+  });
+
+  // Llama-3.2 Butonu
+  const llamaBtn = document.getElementById('llamaBtn');
+  llamaBtn.addEventListener('click', () => {
+    indir(llamaBtn.innerText, "./Llama-3.2-3B-Instruct-Q4_K_M.gguf");
+  });
+</script>
+
 </body>
 </html>
